@@ -2,9 +2,6 @@ extends layout
 
 block content
  .login
-  .iot
-   h3 IBM Internet of Things Foundation
-   img.avatar(src='/images/rexnord_logo.png')
   h2.page-header Login
   p Please login below
   if errors
@@ -17,9 +14,12 @@ block content
    .form-group
     label Password
     input.form-control(name='password', type='password', placeholder='Enter Password')
-   input.btn.btn-primary(type='submit', name='submit',value='Login')
+   input.btn.btn-outline-primary(type='submit', name='submit',value='Login')
+  br
+  .to-register
+   h3 Not Registered?
+   .register-btn
    a(href='/users/register')
     input.btn.btn-success(href='button', name='register', value='Register')
-   
-   
-  
+    
+   include footer    

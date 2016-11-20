@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title Rexnord 
+    title Rexnord IOT 
     link(href='/stylesheets/bootstrap.css', rel='stylesheet')
     link(href='/stylesheets/style.css', rel='stylesheet')
   body
@@ -13,13 +13,17 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/') Rexnord
-           if user
-            li
-               a(href='/users/logout') Logout
+          a.navbar-brand(href='/') Rexnord IOT
+        if user
+          a.logout.btn.btn-primary(href='/users/logout') Logout
     .container
+     .iot
+      img.avatar(src='/images/rexnord_logo.png')
+    
     != messages()
      block content
      
+     
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
     script(src='javascripts/bootstrap.js')
+       
