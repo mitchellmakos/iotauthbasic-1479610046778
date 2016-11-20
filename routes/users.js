@@ -38,7 +38,7 @@ var newUser = {
         dev_id_6: null
 	};
 
-var createUser = function(company, name, title, email, phone, auth_token, username, password, dev_id_1, dev_id_2, dev_id_3, dev_id_4, dev_id_5, dev_id_6) {
+var createUser = function(newUser, company, name, title, email, phone, auth_token, username, password, dev_id_1, dev_id_2, dev_id_3, dev_id_4, dev_id_5, dev_id_6) {
 		
 		var user = newUser;
 		user.company = company;
