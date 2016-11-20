@@ -8,19 +8,6 @@ var cloudant_service = vcapServices.cloudantNoSQLDB[0].credentials;
 var cloudant = Cloudant({account:cloudant_service.username, password:cloudant_service.password});
 var db = cloudant.db.use('users');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('dashboard');
-});
-
-router.get('/login', function(req, res, next) {
-  res.render('login', {title: 'Login'});
-});
-
-router.get('/register', function(req, res, next) {
-  res.render('register', {title: 'Register'});
-});
-
 var newUser = {
 		company: null,
 		name: null,
@@ -65,6 +52,18 @@ var createUser = function(newUser, req, res) {
 	});
 }
 
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('dashboard');
+});
+
+router.get('/login', function(req, res, next) {
+  res.render('login', {title: 'Login'});
+});
+
+router.get('/register', function(req, res, next) {
+  res.render('register', {title: 'Register'});
+});
 
 router.post('/register', function(req, res, next) { 
 	  createUser();	
