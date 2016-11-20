@@ -17,13 +17,13 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
-
+var cfenv = require('cfenv');
 // cfenv provides access to your Cloud Foundry environment
 // for more info, see: https://www.npmjs.com/package/cfenv
-var cfenv = require('cfenv');
 
 
-var index = require('./routes/index');
+
+var routes = require('./routes/index');
 var users = require('./routes/users');
 
 // create a new express server
@@ -81,7 +81,7 @@ app.use(function (req, res, next) {
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 
-app.use('/', index);
+app.use('/', routes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
