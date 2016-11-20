@@ -5,15 +5,15 @@ var LocalStrategy = require('passport-local').Strategy;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('Dashboard');
+  res.send('dashboard');
 });
 
 router.get('/login', function(req, res, next) {
-  res.send('Login');
+  res.send('login');
 });
 
 router.get('/register', function(req, res, next) {
-  res.send('Register');
+  res.send('register');
 });
 
 
