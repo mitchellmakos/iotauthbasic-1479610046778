@@ -5,7 +5,12 @@ var LocalStrategy = require('passport-local').Strategy;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  res.send('dashboard');
+});
+
+router.get('/login', function(req, res, next) {
   res.send('login');
 });
+
 
 module.exports = router;
