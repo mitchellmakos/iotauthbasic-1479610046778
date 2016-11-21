@@ -30,6 +30,15 @@ ul.error li{
     
 }
 
+.register{
+    margin: auto;
+    width: 40%;
+    padding-top: 30px;
+    border: 2px solid #09195D;
+    padding: 10px;
+   
+}
+
 
 h2.page-header{
     text-align: center;
@@ -91,16 +100,12 @@ input.btn.btn-success{
 }
 
 .form-group{
-    width: 50%;
+    width: 70%;
     margin: auto;
 }
 
-.register-btn{
-    margin: auto;
-}
 
 .user-info{
-	float: left;
     margin: auto;
     width: 40%;
     padding-top: 30px;
@@ -108,16 +113,6 @@ input.btn.btn-success{
     padding: 10px;
 
 }
-
-.devices{
-	float: right;
-	margin: auto;
-    width: 40%;
-    padding-top: 30px;
-    border: 3px solid black;
-    padding: 10px;
-}
-
 
 	
 
