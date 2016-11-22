@@ -25,25 +25,19 @@ router.get('/register', function(req, res, next) {
 });
 
 router.post('/register', function(req, res) { 
-var company = req.body.company;
-var name = req.body.name;
-var title = req.body.title;
+var company=req.body.company;
+var name=req.body.name;
 
 
-	db.insert({"company": company,
-		"name": name,
-		"title": title}, null, function(err, body){
+	db.insert({
+		"company": company,
+		"name": name}, null, function(err, body){
 			if(!err){
 				console.log(body);
 			}
+			res.redirect('/');
 		});
-	res.redirect('/');	
 		
 });
-
-
-
-
-
 
 module.exports = router;
