@@ -36,7 +36,25 @@ var dev_id_2=req.body.dev_id_2;
 var dev_id_3=req.body.dev_id_3;
 var dev_id_4=req.body.dev_id_4;
 var dev_id_5=req.body.dev_id_5;
-var dev_id_6=req.body.dev_id_6;	
+var dev_id_6=req.body.dev_id_6;
+
+  req.checkBody('company','Name field is required').notEmpty();
+  req.checkBody('name','Email field is required').notEmpty();
+  req.checkBody('email','Email is not valid').isEmail();
+  req.checkBody('auth_token','Username field is required').notEmpty();
+  req.checkBody('username','Password field is required').notEmpty();
+  req.checkBody('password','Password field is required').notEmpty();
+  req.checkBody('password2','Passwords do not match').equals(req.body.password);
+  req.checkBody('dev_id_1','Password field is required').notEmpty();
+
+  // Check Errors
+  var errors = req.validationErrors();
+
+  if(errors){
+  	res.render('register', {
+  		errors: errors
+  	});
+  } else{	
 
 	db.insert({
 		"company": company,
