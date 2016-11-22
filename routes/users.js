@@ -59,6 +59,7 @@ var dev_id_6=req.body.dev_id_6;
   	bcrypt.genSalt(10, function(err, salt) {
     	bcrypt.hash(password, salt, function(err, hash) {
    			password = hash;
+   			password.save(callback);
     	});
 	});
 
