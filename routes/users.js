@@ -10,7 +10,6 @@ var cloudant = Cloudant({account:cloudant_service.username, password:cloudant_se
 var db = cloudant.db.use('users');
 
 
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('dashboard');
@@ -24,6 +23,8 @@ router.get('/register', function(req, res, next) {
   res.render('register', {title: 'Register'});
 });
 
+
+// route to post form data to cloudant and register a user
 router.post('/register', function(req, res) { 
 var company=req.body.company;
 var name=req.body.name;
@@ -38,6 +39,7 @@ var dev_id_4=req.body.dev_id_4;
 var dev_id_5=req.body.dev_id_5;
 var dev_id_6=req.body.dev_id_6;
 
+// Form Validation 
   req.checkBody('company','Name field is required').notEmpty();
   req.checkBody('name','Name field is required').notEmpty();
   req.checkBody('email','Email is not valid').isEmail();
@@ -56,33 +58,34 @@ var dev_id_6=req.body.dev_id_6;
   	});
   } else{
   	
+//  	hash password and post data to cloudant 
   	bcrypt.genSalt(10, function(err, salt) {
     	bcrypt.hash(password, salt, function(err, hash) {
-   			password = hash;
-   			password.save(callback);
+   			db.insert({
+			"company": company,
+			"name": name,
+			"email": email,
+			"auth_token": auth_token,
+			"uaername": username,
+			"password": hash,
+			"dev_id_1": dev_id_1,
+			"dev_id_2": dev_id_2,
+			"dev_id_3": dev_id_3,
+			"dev_id_4": dev_id_4,
+			"dev_id_5": dev_id_5,
+			"dev_id_6": dev_id_6}, null, function(err, body){
+				if(!err){
+					console.log(body);
+				}
+				res.redirect('/');
+			});
     	});
 	});
-
-	db.insert({
-		"company": company,
-		"name": name,
-		"email": email,
-		"auth_token": auth_token,
-		"uaername": username,
-		"password": password,
-		"dev_id_1": dev_id_1,
-		"dev_id_2": dev_id_2,
-		"dev_id_3": dev_id_3,
-		"dev_id_4": dev_id_4,
-		"dev_id_5": dev_id_5,
-		"dev_id_6": dev_id_6}, null, function(err, body){
-			if(!err){
-				console.log(body);
-			}
-			res.redirect('/');
-		});
+	
 	}
 
 });
+
+
 
 module.exports = router;
