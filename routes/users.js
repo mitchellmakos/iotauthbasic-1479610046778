@@ -74,7 +74,8 @@ var dev_id_6=req.body.dev_id_6;
 			}
 			res.redirect('/');
 		});
-		
+	}
+
 });
 
 module.exports = router;
