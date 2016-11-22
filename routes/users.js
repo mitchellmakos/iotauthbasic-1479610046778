@@ -4,7 +4,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Cloudant = require('cloudant');
 var vcapServices = require('../vcapServices');
-
+var bcrypt = require('bcryptjs');
 var cloudant_service = vcapServices.cloudantNoSQLDB[0].credentials;
 var cloudant = Cloudant({account:cloudant_service.username, password:cloudant_service.password});
 var db = cloudant.db.use('users');
@@ -39,13 +39,13 @@ var dev_id_5=req.body.dev_id_5;
 var dev_id_6=req.body.dev_id_6;
 
   req.checkBody('company','Name field is required').notEmpty();
-  req.checkBody('name','Email field is required').notEmpty();
+  req.checkBody('name','Name field is required').notEmpty();
   req.checkBody('email','Email is not valid').isEmail();
-  req.checkBody('auth_token','Username field is required').notEmpty();
-  req.checkBody('username','Password field is required').notEmpty();
+  req.checkBody('auth_token','Authentication Token is required to register').notEmpty();
+  req.checkBody('username','Username field is required').notEmpty();
   req.checkBody('password','Password field is required').notEmpty();
   req.checkBody('password2','Passwords do not match').equals(req.body.password);
-  req.checkBody('dev_id_1','Password field is required').notEmpty();
+  req.checkBody('dev_id_1','You musr register at least 1 Device').notEmpty();
 
   // Check Errors
   var errors = req.validationErrors();
@@ -54,7 +54,13 @@ var dev_id_6=req.body.dev_id_6;
   	res.render('register', {
   		errors: errors
   	});
-  } else{	
+  } else{
+  	
+  	bcrypt.genSalt(10, function(err, salt) {
+    	bcrypt.hash(password, salt, function(err, hash) {
+   			password = hash;
+    	});
+	});
 
 	db.insert({
 		"company": company,
