@@ -9,14 +9,10 @@ html(lang='en')
       .container-fluid
         .navbar-header
           a.navbar-brand(href='/')
-            img(alt='Brand', src='images/rexnord_logo.png')
-        if user
-          a.logout.btn.btn-primary(href='/users/logout') Logout
+            img(alt='Brand', src='/images/rexnord_logo.png')
     .container
      .iot
       img.avatar(src='/images/rexnord_logo.png')
-    
-    != messages()
      block content
      
      
