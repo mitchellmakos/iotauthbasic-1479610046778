@@ -23,6 +23,8 @@ var cfenv = require('cfenv');
 
 
 
+
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -50,6 +52,7 @@ app.use(session({
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Validator
 app.use(expressValidator({

@@ -10,6 +10,9 @@ var cloudant = Cloudant({account:cloudant_service.username, password:cloudant_se
 var db = cloudant.db.use('users');
 
 
+require('../config/passport')(passport); // pass passport for configuration
+
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('dashboard');
@@ -21,6 +24,27 @@ router.get('/login', function(req, res, next) {
 
 router.get('/register', function(req, res, next) {
   res.render('register', {title: 'Register'});
+});
+
+
+router.post('/login',  function(req, res, next) {
+      passport.authenticate('local-login', function(err, user, info) {
+        console.log("In Passport Authenticate Route");
+        if (err || !user) { res.status(500).json(info); }
+        else {
+            req.logIn(user, function(err) {
+                if (err) { res.status(500).json(err); }
+                else {
+//                	res.status(200).send(); 
+//                	res.render('dashboard', {title: 'Dashboard'});
+					req.flash('success', 'You are now logged in');
+					res.location('/');
+			    	res.redirect('/');
+                }
+            });      
+        }
+      })(req, res, next);
+      
 });
 
 
@@ -62,11 +86,12 @@ var dev_id_6=req.body.dev_id_6;
   	bcrypt.genSalt(10, function(err, salt) {
     	bcrypt.hash(password, salt, function(err, hash) {
    			db.insert({
+   				"_id": username,
 			"company": company,
 			"name": name,
 			"email": email,
 			"auth_token": auth_token,
-			"uaername": username,
+			"username": username,
 			"password": hash,
 			"dev_id_1": dev_id_1,
 			"dev_id_2": dev_id_2,
@@ -77,7 +102,10 @@ var dev_id_6=req.body.dev_id_6;
 				if(!err){
 					console.log(body);
 				}
-				res.redirect('/');
+				 req.flash('success', 'You are now registered and can login');
+
+			    res.location('/');
+			    res.redirect('/');
 			});
     	});
 	});
