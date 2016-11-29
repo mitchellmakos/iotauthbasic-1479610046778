@@ -22,9 +22,6 @@ var cfenv = require('cfenv');
 // for more info, see: https://www.npmjs.com/package/cfenv
 
 
-
-
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -81,7 +78,10 @@ app.use(function (req, res, next) {
   next();
 });
 
-
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next();
+});
 
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();

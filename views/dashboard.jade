@@ -1,8 +1,18 @@
 extends layout
 
 block content
- h3 Welcom to the Dashboard
- 
- 
+  h3 #{user} is now logged in
+  h3 Welcom to the Dashboard
+   h1.devicesText Device:
+   select.devicesSelect#deviceslist
+    
+     option(value="#{user.dev_id_1}") Device ID: "#{user.dev_id_1}"
+     option(value="#{user.dev_id_1}") Device ID: "#{user.dev_id_2}"
+     option(value="#{user.dev_id_1}") Device ID: "#{user.dev_id_3}"
+     option(value="#{user.dev_id_1}") Device ID: "#{user.dev_id_4}"
+     option(value="#{user.dev_id_1}") Device ID: "#{user.dev_id_5}"
+     option(value="#{user.dev_id_1}") Device ID: "#{user.dev_id_6}"
+
+
 include footer    
 
