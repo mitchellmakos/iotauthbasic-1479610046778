@@ -29,6 +29,7 @@ router.get('/register', function(req, res, next) {
 
 router.post('/login',  function(req, res, next) {
       passport.authenticate('local-login', function(err, user, info) {
+      	console.log(user);
         console.log("In Passport Authenticate Route");
         if (err || !user) { res.status(500).json(info); }
         else {

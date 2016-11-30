@@ -25,8 +25,8 @@ module.exports = function(passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req,username, password, done) {
-            var body = req.body;
-            console.log(body);
+//            var body = req.body;
+//            console.log(JSON.stringify(body));
 
             // Use Cloudant query to find the user just based on user name
             var db = cloudant.db.use('users');
@@ -44,6 +44,7 @@ module.exports = function(passport) {
                 var user = result;
                 if (bcrypt.compareSync(password, user.password)) {
                     console.log("Password matches");
+                    console.log(user);
                      // all is well, return successful user
                     return done(null, user);
                 } 
